@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Collection;
+import java.util.Set;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
@@ -17,7 +19,7 @@ import org.w3c.dom.NodeList;
 
 import es.aguasnegras.jaxrs.domain.model.Customer;
 
-@Path("/customer")
+@Path("/customers")
 public class CustomerServiceImpl extends BaseCustomerService implements CustomerService {
 	@Override
 	protected void outputCustomer(OutputStream os, Customer cust)
@@ -68,6 +70,14 @@ public class CustomerServiceImpl extends BaseCustomerService implements Customer
 			return cust;
 		} catch (Exception e) {
 			throw new WebApplicationException(e, Response.Status.BAD_REQUEST);
+		}
+	}
+
+	@Override
+	protected void outputCustomers(OutputStream os, Collection<Customer> custs)
+			throws IOException {
+		for (Customer cust: custs) {
+			this.outputCustomer(os, cust);
 		}
 	}
 }

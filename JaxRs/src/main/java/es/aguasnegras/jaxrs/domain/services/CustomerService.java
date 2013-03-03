@@ -22,6 +22,10 @@ public interface CustomerService {
 	@Path("{id}")
 	@Produces("application/xml")
 	public abstract StreamingOutput getCustomer(@PathParam("id") int id);
+	
+	@GET
+	@Produces("application/xml")
+	public abstract StreamingOutput getCustomers();
 
 	@PUT
 	@Path("{id}")
